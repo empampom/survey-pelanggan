@@ -12,14 +12,23 @@ class SurveyEksekutifController extends Controller
     public function form()
     {
         // dd('sini');
-        return view('tulip/index');
+        $list_pertanyaan = DB::table('pertanyaan')->get();
+        return view('tulip/index', compact('list_pertanyaan'));
     }
 
     public function action(Request $request){
-        $data = $request->all();
-        unset($data['_token']);
-        $status = DB::table('survey_pelanggan')->insert($data);
-        // dd($request);
+        $user_id = DB::table('jawaban')->max('user_id');
+        $user_id += 1;
+        for ($i=1; $i <= 25; $i++) { 
+            $jawaban_point = "jawaban".$i;
+            $pertanyaan = "pertanyaan".$i;
+            $data = [
+                'user_id' => $user_id,
+                'pertanyaan_id' => $request->$pertanyaan,
+                'jawaban' => $request->$jawaban_point,
+            ];
+            DB::table('jawaban')->insert($data);
+        }
         return Redirect::back()->with(['success' => 'Data Berhasil Di Perbarui!']);
     }
 }
