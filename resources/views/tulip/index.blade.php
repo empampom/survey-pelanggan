@@ -19,11 +19,12 @@
             <div class="d-flex justify-content-between">
                 <img width="30%" src="{{ asset('assets/img/rsup.png') }}">
                 <img width="30%" src="{{ asset('assets/img/kgm.png') }}">
-                <img width="30%" src="{{ asset('assets/img/ihc.png') }}">
+                <img class="" src="{{ asset('assets/img/ihc.png') }}">
             </div>
         </div>
         <hr>
-        <p>Selam sehat dan salam sejahtera untuk pasien RSU Pekerja yang kami cintai Kami berterimakasih atas kepercayaannya untuk memilih RSU Pekerja sebagai tempat terbaik dan teman terpercaya dalam proses penyembuhan.
+        <p>
+            Selam sehat dan salam sejahtera untuk pasien RSU Pekerja yang kami cintai Kami berterimakasih atas kepercayaannya untuk memilih RSU Pekerja sebagai tempat terbaik dan teman terpercaya dalam proses penyembuhan.
             Kami harap Bapak dan Ibu dapat turut serta mengisi survey kepuasan sebagai berikut :<br>
         </p>
 
