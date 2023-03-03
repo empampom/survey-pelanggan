@@ -17,9 +17,9 @@
     <div class="container my-3">
         <div class="row mb-3">
             <div class="d-flex justify-content-between">
-                <img width="30%" src="{{ asset('assets/img/rsup.png') }}">
-                <img width="30%" src="{{ asset('assets/img/kgm.png') }}">
-                <img class="" src="{{ asset('assets/img/ihc.png') }}">
+                <img width="25%" src="{{ asset('assets/img/rsup.png') }}">
+                <img width="20%" src="{{ asset('assets/img/kgm.png') }}">
+                <img width="35%" src="{{ asset('assets/img/ihc.png') }}">
             </div>
         </div>
         <hr>
@@ -75,8 +75,6 @@
                     </div>
                 </div>
             @endforeach
-            <input type="hidden" name="total" value="{{ $no }}">
-            {{-- <button class="btn btn-primary" onclick="klik()">KIRIM</button> --}}
             <center class="mt-2">
                 <button class="btn btn-primary btn-block w-100 btn-shadow" type="submit">KIRIM</button>
             </center>
