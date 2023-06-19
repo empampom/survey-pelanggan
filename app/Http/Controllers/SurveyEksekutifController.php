@@ -10,8 +10,13 @@ class SurveyEksekutifController extends Controller
 {
     public function form()
     {
-        $list_pertanyaan = DB::table('pertanyaan')->get();
+        $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 1)->get();
         return view('tulip/index', compact('list_pertanyaan'));
+    }
+    public function rajal()
+    {
+        $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
+        return view('rajal/index', compact('list_pertanyaan'));
     }
 
     public function action(Request $request)
@@ -28,6 +33,12 @@ class SurveyEksekutifController extends Controller
             ];
             DB::table('jawaban')->insert($data);
         }
+        $data = [
+            'user_id' => $user_id,
+            'pertanyaan_id' => 0,
+            'jawaban' => $request->saran,
+        ];
+        DB::table('jawaban')->insert($data);
         return Redirect::back()->with(['success' => 'Data Berhasil Di Perbarui!']);
     }
 }
