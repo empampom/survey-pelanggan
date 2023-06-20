@@ -13,9 +13,14 @@ class SurveyEksekutifController extends Controller
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 1)->get();
         return view('tulip/index', compact('list_pertanyaan'));
     }
-    public function rajal()
+    public function ranap()
     {
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
+        return view('rajal/index', compact('list_pertanyaan'));
+    }
+    public function rajal()
+    {
+        $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 3)->get();
         return view('rajal/index', compact('list_pertanyaan'));
     }
 
