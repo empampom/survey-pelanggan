@@ -13,21 +13,21 @@ class SurveyEksekutifController extends Controller
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 1)->get();
         return view('tulip/index', compact('list_pertanyaan'));
     }
-    public function ranap()
+    public function ranap($user_id)
     {
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
-        return view('rajal/index', compact('list_pertanyaan'));
+        return view('form/index', compact('list_pertanyaan','user_id'));
     }
-    public function rajal()
+    public function rajal($user_id)
     {
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 3)->get();
-        return view('rajal/index', compact('list_pertanyaan'));
+        return view('form/index', compact('list_pertanyaan','user_id'));
     }
-
     public function action(Request $request)
     {
-        $user_id = DB::table('jawaban')->max('user_id');
-        $user_id += 1;
+        // $user_id = DB::table('jawaban')->max('user_id');
+        // $user_id += 1;
+        $user_id = $request->user_id;
         for ($i = 1; $i <= 25; $i++) {
             $jawaban_point = "jawaban" . $i;
             $pertanyaan = "pertanyaan" . $i;

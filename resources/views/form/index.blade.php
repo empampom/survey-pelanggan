@@ -75,6 +75,7 @@
                     </div>
                 </div>
                 @endforeach
+                <input type="hidden" name="user_id" value="{{ $user_id }}">
                 <div class="card mt-2">
                     <div class="card-body">
                         <div class="form-group">
