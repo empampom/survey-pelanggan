@@ -13,6 +13,15 @@ class SurveyEksekutifController extends Controller
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 1)->get();
         return view('tulip/index', compact('list_pertanyaan'));
     }
+    public function kuis($jenis,$user_id)
+    {
+        $kategori_kuis = DB::table('kategori_kuis')->where('url', $jenis)->first();
+        if(empty($kategori_kuis)){
+            return view('404');
+        }
+        $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
+        return view('form/index', compact('list_pertanyaan','user_id'));
+    }
     public function ranap($user_id)
     {
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();

@@ -7,6 +7,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\HakAksesController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PertanyaanController;
+use App\Http\Controllers\Admin\KategoriKuisController;
+
 // use App\Http\Controllers\Admin\HomeController;
 
 
@@ -29,18 +31,6 @@ Route::post('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
-
-Route::controller(SurveyEksekutifController::class)->group(function () {
-    Route::get('/', 'form')->name('tulip.form');
-    Route::get('/rajal/{id}', 'rajal')->name('tulip.rajal');
-    Route::get('/ranap/{id}', 'ranap')->name('tulip.ranap');
-    Route::post('/action', 'action')->name('tulip.action');
-});
-Route::controller(ReportController::class)->group(function () {
-    Route::get('/report/tulip', 'tulip')->name('report.tulip.form');
-    Route::post('/report/tulip', 'tulipResult')->name('report.tulip.result');
-});
-// Route::view('/admin', 'admin');
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -83,9 +73,30 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/pertanyaan/edit/{id}', 'edit');
             Route::get('/pertanyaan/delete/{id}', 'delete');
             Route::get('/pertanyaan/modul_akses/{id}', 'modul_akses');
-            Route::post('/pertanyaan/modul_akses', 'modul_akses_store');
+            Route::post('/pertanyaan/detail', 'detail');
             Route::post('/pertanyaan/store', 'store');
             Route::post('/pertanyaan/update', 'update');
         });
+
+        Route::controller(KategoriKuisController::class)->middleware('cek_login:kategori_kuis.index')->group(function () {
+            Route::get('/kategori_kuis', 'index')->name('kategori_kuis.index');
+            Route::get('/kategori_kuis/sync', 'sync');
+            Route::post('/kategori_kuis/store', 'store');
+            Route::post('/kategori_kuis/update', 'update');
+            Route::get('/kategori_kuis/edit/{id}', 'edit');
+            Route::get('/kategori_kuis/delete/{id}', 'delete');
+        });
     });
 });
+
+Route::controller(SurveyEksekutifController::class)->group(function () {
+    Route::get('/', 'form')->name('tulip.form');
+    Route::get('/{jenis}/{id}', 'kuis')->name('kuis');
+    // Route::get('/ranap/{id}', 'ranap')->name('tulip.ranap');
+    // Route::post('/action', 'action')->name('tulip.action');
+});
+Route::controller(ReportController::class)->group(function () {
+    Route::get('/report/tulip', 'tulip')->name('report.tulip.form');
+    Route::post('/report/tulip', 'tulipResult')->name('report.tulip.result');
+});
+// Route::view('/admin', 'admin');

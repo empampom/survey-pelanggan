@@ -14,8 +14,17 @@ class PertanyaanController extends Controller
 {
     public function index()
     {
-        $data = DB::table('pertanyaan') ->get();
-        return view('admin.pertanyaan.index', compact('data'));
+        $id = '';
+        $data = DB::table('pertanyaan')->get();
+        $kategori_kuis = DB::table('kategori_kuis')->whereNull('deleted_by')->get();
+        return view('admin.pertanyaan.index', compact('data','kategori_kuis','id'));
+    }
+    public function detail(Request $request)
+    {
+        $id = $request->kategori_kuis_id;
+        $data = DB::table('pertanyaan')->where('urutan',$request->kategori_kuis_id)->get();
+        $kategori_kuis = DB::table('kategori_kuis')->whereNull('deleted_by')->get();
+        return view('admin.pertanyaan.index', compact('data','kategori_kuis','id'));
     }
     public function modul_akses($id)
     {
@@ -63,12 +72,19 @@ class PertanyaanController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'nama_pertanyaan' => ['required', 'string'],
+            'pertanyaan' => ['required', 'string'],
+            'jenis_jawaban' => ['required', 'string'],
         ]);
         $data = [
-            'nama_pertanyaan' => $request->nama_pertanyaan,
-            'created_by' => Auth::user()->id,
-            'created_at' => now(),
+            'pertanyaan' => $request->pertanyaan,
+            'jenis_jawaban' => $request->jenis_jawaban,
+            'jawaban1' => $request->jawaban1,
+            'jawaban2' => $request->jawaban2,
+            'jawaban3' => $request->jawaban3,
+            'jawaban4' => $request->jawaban4,
+            'jawaban5' => $request->jawaban5,
+            'urutan_soal' => $request->urutan_soal,
+            'urutan' => $request->urutan,
         ];
         DB::table('pertanyaan')->insert($data);
 
