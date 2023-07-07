@@ -93,7 +93,7 @@ Route::controller(SurveyEksekutifController::class)->group(function () {
     Route::get('/', 'form')->name('tulip.form');
     Route::get('/{jenis}/{id}', 'kuis')->name('kuis');
     // Route::get('/ranap/{id}', 'ranap')->name('tulip.ranap');
-    // Route::post('/action', 'action')->name('tulip.action');
+    Route::post('/action', 'action')->name('tulip.action');
 });
 Route::controller(ReportController::class)->group(function () {
     Route::get('/report/tulip', 'tulip')->name('report.tulip.form');

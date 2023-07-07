@@ -10,8 +10,9 @@ class SurveyEksekutifController extends Controller
 {
     public function form()
     {
+        $urutan = 1;
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 1)->get();
-        return view('tulip/index', compact('list_pertanyaan'));
+        return view('tulip/index', compact('list_pertanyaan','urutan'));
     }
     public function kuis($jenis,$user_id)
     {
@@ -20,17 +21,19 @@ class SurveyEksekutifController extends Controller
             return view('404');
         }
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
-        return view('form/index', compact('list_pertanyaan','user_id'));
+        return view('form/index', compact('list_pertanyaan','user_id','urutan'));
     }
     public function ranap($user_id)
     {
+        $urutan = 2;
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 2)->get();
-        return view('form/index', compact('list_pertanyaan','user_id'));
+        return view('form/index', compact('list_pertanyaan','user_id','urutan'));
     }
     public function rajal($user_id)
     {
+        $urutan = 3;
         $list_pertanyaan = DB::table('pertanyaan')->where('urutan', 3)->get();
-        return view('form/index', compact('list_pertanyaan','user_id'));
+        return view('form/index', compact('list_pertanyaan','user_id','urutan'));
     }
     public function action(Request $request)
     {
@@ -49,7 +52,7 @@ class SurveyEksekutifController extends Controller
         }
         $data = [
             'user_id' => $user_id,
-            'pertanyaan_id' => 0,
+            'pertanyaan_id' => $request->saran_id,
             'jawaban' => $request->saran,
         ];
         DB::table('jawaban')->insert($data);

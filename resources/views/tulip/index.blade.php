@@ -83,6 +83,7 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" name="saran_id" value="saran-{{ $urutan }}">
             <center class="mt-2">
                 <button class="btn btn-primary btn-block w-100 btn-shadow" type="submit">KIRIM</button>
             </center>
